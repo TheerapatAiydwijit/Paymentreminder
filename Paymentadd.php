@@ -89,6 +89,9 @@ if (isset($_GET['Edit'])) {
           var icon = "success";
           var tital = "ทำการบันทึกรายละเอียดการจ่ายเงินเสร็ยจสิ้น";
           Notifytoprigth(tital, icon);
+          setTimeout(function() {
+            location.reload();
+          }, 1500)
         },
         error: function(e) {
           console.log(e);
@@ -96,7 +99,7 @@ if (isset($_GET['Edit'])) {
       });
     }
 
-    function test(file) {
+    function fileupdate(file) {
       var files = file.files;
       var filename = files[0].name;
       var url = URL.createObjectURL(files[0]);
@@ -105,6 +108,10 @@ if (isset($_GET['Edit'])) {
       atage.target = "_blank";
       atage.innerHTML = filename;
       $(file).closest('li').children('.textshow').find('small').html(atage);
+    }
+
+    function tarclik(location) {
+      $(location).closest('div').children('input').trigger("click");
     }
 
     function creatperiod(num) {
@@ -133,16 +140,14 @@ if (isset($_GET['Edit'])) {
         file.type = 'file';
         file.setAttribute('accept', '.png, .jpg, .jpeg');
         file.setAttribute("name", "slip[]");
-        file.setAttribute("onchange", "test(this)");
+        file.setAttribute("onchange", "fileupdate(this)");
         file.style.display = 'none';
         divinput.appendChild(file);
         // 
         var button = document.createElement('button');
         button.setAttribute("type", "button");
         button.setAttribute("class", "btn btn-light");
-        button.addEventListener("click", function() {
-          $(this).closest('div').children('input').trigger("click");
-        });
+        button.setAttribute("onclick", "tarclik(this)");
         var spanicon = document.createElement('span');
         spanicon.setAttribute("class", "input-group-text h1");
         var itag = document.createElement('i');
@@ -204,12 +209,14 @@ if (isset($_GET['Edit'])) {
       <form method="POST" action="Process/Paymentpang2.php" id="addPayment" enctype="multipart/form-data">
         <div class="row ml-5">
           <div class="col-md-7">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-muted">รายละเอียด</span>
-              <!-- <span class="badge badge-secondary badge-pill">3</span> -->
-            </h4>
             <div class="card">
               <div class="card-header">
+                <h4 class="d-flex justify-content-between align-items-center">
+                  <span class="text-muted">รายละเอียด</span>
+                  <!-- <span class="badge badge-secondary badge-pill">3</span> -->
+                </h4>
+              </div>
+              <div class="card-body">
                 <select class="js-data-example-ajax" name="Websitename" style="width: 100%;">
                   <?php
                   if (isset($_GET['Edit'])) { ?>
@@ -260,14 +267,22 @@ if (isset($_GET['Edit'])) {
                     if (!state.id) {
                       return state.text;
                     }
+                    // if (state.order % 2 == 0) {
+                    //   var $state = $(
+                    //     '<div class="row" style="background-color:#D7DBDD;"><div class="col-md-8">' + 'โดเมนเนม ' + state.text + ' จากบริษัท ' + state.comname + '</div> <div class="col ml-auto">' + state.Datethai + '</div></div>'
+                    //   );
+                    // } else {
+                    //   var $state = $(
+                    //     '<div class="row"><div class="col-md-8">' + 'โดเมนเนม ' + state.text + ' จากบริษัท ' + state.comname + '</div> <div class="col ml-auto">' + state.Datethai + '</div></div>'
+                    //   );
+                    // }
                     var $state = $(
-                      '<span> - ' + 'โดเมนเนม ' + state.text + ' จากบริษัท ' + state.comname + '</span>'
-                    );
+                        '<div class="row"><div class="col-md-8">' + 'โดเมนเนม ' + state.text + ' จากบริษัท ' + state.comname + '</div> <div class="col ml-auto">' + state.Datethai + '</div></div>'
+                      );
                     return $state;
                   };
                 </script>
-              </div>
-              <div class="card-body">
+                <br><br>
                 <div class="mb-3">
                   <label for="username">ชื่อบริษัท</label>
                   <div class="input-group">
@@ -322,10 +337,6 @@ if (isset($_GET['Edit'])) {
             <button type="submit" class="btn btn-success text-white"><i class="far fa-save"></i> บันทึก</button>
           </div>
           <div class="col-md-3 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-muted">งวดจ่าย</span>
-              <!-- <span class="badge badge-secondary badge-pill">3</span> -->
-            </h4>
             <ul class="list-unstyled">
               <li>
                 <ul class="list-group mb-3" id="periodtable">
@@ -336,14 +347,16 @@ if (isset($_GET['Edit'])) {
                         <div class="textshow">
                           <h6 class="my-0">งวดที่ 1</h6>
                           <small class="text-muted">
-                         <?php if ($datapaymrnted['Slipname'] != '0') { ?>
-                            <a href="customerdetail/<?php echo $cusdata['Company'] . $Co_id . "/slip" . "/" . $datapaymrnted['Slipname']; ?>" target="_blank"><?php echo $datapaymrnted['Slipname']; ?></a>
-                         <?php }else{echo "ไม่มีไฟล์";} ?>
+                            <?php if ($datapaymrnted['Slipname'] != '0') { ?>
+                              <a href="customerdetail/<?php echo $cusdata['Company'] . $Co_id . "/slip" . "/" . $datapaymrnted['Slipname']; ?>" target="_blank"><?php echo $datapaymrnted['Slipname']; ?></a>
+                            <?php } else {
+                              echo "ไม่มีไฟล์";
+                            } ?>
                           </small>
                         </div>
                         <div class="input-group-prepend">
-                          <input type="File" id="<?php echo $datapaymrnted['order_detail']; ?>" name="slip[]" onchange="uplondslip(this)" style="display: none;">
-                          <button type="button" class="btn btn-light">
+                          <input type="File" id="<?php echo $datapaymrnted['order_detail']; ?>" name="slip[]" onchange="uplondslip(this)" accept='.png, .jpg, .jpeg' style="display: none;">
+                          <button type="button" class="btn btn-light" onclick="tarclik(this)">
                             <span class="input-group-text h1">
                               <i class="fas fa-upload"></i>
                             </span>
@@ -383,8 +396,18 @@ if (isset($_GET['Edit'])) {
                 </ul>
               </li> -->
               <li class="list-group-item d-flex justify-content-between">
-                <span>งวดละ</span>
-                <strong>$1000</strong>
+                <span>สถาณะการชำระเงิน</span>
+                <strong><?php
+                        if (isset($_GET['Edit'])) {
+                          if ($value['status'] == "0") {
+                            echo '<span class="badge badge-secondary badge-warning">กำลังดำเนินการ</span>';
+                          } else {
+                            echo '<span class="badge badge-secondary badge-success">เสร็ยจสิ้น</span>';
+                          }
+                        } else {
+                          echo '<span class="badge badge-secondary badge-info">ไม่ระบุ</span>';
+                        }
+                        ?></strong>
               </li>
             </ul>
           </div>

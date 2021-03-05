@@ -1,5 +1,6 @@
 <?php
     include("../include/Connect.php");
+    include("../include/Frequently.php");
     if(isset($_GET['term'])){
         $term = $_GET['term'];
         $sql = "SELECT * FROM customer WHERE Domain LIKE '%".$term."%' OR Company LIKE '%".$term."%'";
@@ -35,10 +36,12 @@
             // }
             $results[$i] = array(
                                 'id'=>$Co_id,
+                                'order'=>$i,
                                 'text'=>$data['Domain'],
                                 'comname'=>$data['Company'],
                                 'Rates'=>$data['Rates'],
                                 'Duedate'=>cutyear($data['Duedate']),
+                                'Datethai'=>Datethai(cutyear($data['Duedate'])),
                                 'Lyear'=>$Lyear
             );
             $i++;
