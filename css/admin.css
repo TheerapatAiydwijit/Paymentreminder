@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background-color: #fbfcfc;
+}
+.list,
+.list:hover,
+.list:focus {
+  font-family: "Kanit", sans-serif;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 40px;
+}
+.wrapper {
+  display: flex;
+  text-decoration: none;
+  max-height: 100%;
+  transition: all 0.3s;
+}
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background-color: #343a40;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+#sidebar.active {
+  overflow: hidden;
+  padding-left: 0;
+  min-width: 100px;
+  transition: all 0.3s;
+  /* margin-left: -150px; */
+}
+#sidebar.active .test {
+  display: none;
+  /* transition: all 5.4s; */
+}
+#sidebar.active .list {
+  /* visibility: hidden; */
+  padding: 15px 10px;
+}
+#sidebar:hover {
+  min-width: 250px;
+}
+#sidebar:hover .test {
+  display: block;
+}
+
+#sidebar .sidebar-header img {
+  margin: 10px;
+  text-align: center;
+  /* border-radius: 30%; */
+}
+#sidebar .sidebar-sub-header {
+  padding: 0 0 0 20px;
+  text-align: left;
+  font-family: "Kanit", sans-serif;
+  font-size: 20px;
+  color: #666666;
+}
+#sidebar .sidebar-sub-header img {
+  border-radius: 50%;
+}
+#sidebar ul p {
+  color: #ffffff;
+  padding: 10px;
+}
+#sidebar ul li a {
+  text-align: left;
+  padding: 10px 0 0 25px;
+  font-size: 20px;
+  display: block;
+}
+#sidebar ul li a:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+#sidebar ul li .active > a,
+a[aria-expanded="true"] {
+  color: #000000;
+  background-color: #ececec;
+}
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background-color: #ececec;
+}
+.heder {
+  font-family: "Kanit", sans-serif;
+  width: 100vw;
+}
+.heder a {
+  text-decoration: none;
+}
+.heder ul li {
+  padding: 10px;
+}
+.heder .dropdown-menu {
+  margin-right: 30px;
+}
+
+/* CSS Arrows */
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

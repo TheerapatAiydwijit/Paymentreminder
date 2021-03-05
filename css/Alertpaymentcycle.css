@@ -1,0 +1,15 @@
+#data .card-body{
+    border: 2px solid #4D5656;
+}
+#data .card-body:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    max-height: 100vh;
+    transition: all 0.3s;
+    overflow: scroll;
+    overflow-x: hidden;
+  }

@@ -1,0 +1,38 @@
+.listpaymente{
+    min-height:80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  
+}
+#paymentlist .listpaymente::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+#slippayment{
+    min-height:50vh;
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  
+}
+#paymentlist #slippayment::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+/* .listpaymente,.concludepaymente,.detailpaymente{
+    border: 0.5px #000000 solid;
+} */
+
+.photo-gallery {
+    color:#313437;
+    background-color:#fff;
+  }
+  .photo-gallery .photos {
+    padding-bottom:20px;
+  }
+  
+  .photo-gallery .item {
+    padding-bottom:30px;
+  }
+  

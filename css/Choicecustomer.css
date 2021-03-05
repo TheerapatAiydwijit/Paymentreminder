@@ -1,0 +1,11 @@
+#CardCustomer .media-body h2{
+    color: #000;
+}
+#CardCustomer .card-body:hover{
+    background-color: rgba(215, 219, 221,0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+/* #CardCustomer :hover > .media-body h2{
+    color:#FFFFFF;
+} */
