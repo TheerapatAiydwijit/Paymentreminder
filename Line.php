@@ -13,6 +13,9 @@ if ($text == "halp"){
 }else{
     $messages['messages'][0] = getFormatTextMessage($text,"0");
 }
+if($text == "ลูกค้าที่ใกล้ถึงรอบ"){
+    $messages['messages'][0] = getFormatTextMessage("โดเมน A_dfwf 20/21/63","0");
+}
 $Body = json_encode($messages);
 $sendre = responsemanage($Headers, $Body);
 function getFormatTextMessage($text,$quickReply)
