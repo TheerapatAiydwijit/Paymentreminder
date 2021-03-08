@@ -11,6 +11,7 @@ if ($current == "12") {
 $month = date("m", strtotime($date . "+1 month"));
 // $date = "-".$date."-";
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +42,7 @@ $month = date("m", strtotime($date . "+1 month"));
                 $('#detailmoney').attr("name", 0);
                 $('#detailmoney').css('margin-right', '-100vw');
                 // console.log(month);
+                $('#customerDetail').html("");
                 getdate(month, newyear);
             })
         });
@@ -57,124 +59,97 @@ $month = date("m", strtotime($date . "+1 month"));
                 type: "POST",
                 dataType: "json",
                 success: function(require) {
-                    console.log(require);
-                    $('#data').html(require);
+                    // console.log(require);
+                    require.forEach(showdata);
                 }
             });
         }
 
-        function showdata(Co_id) {
-            var namedetail = $('#detailmoney').attr("name");
-            $('#detailmoney').css('margin-right', '0');
-            $('#detailmoney').attr("name", Co_id);
-            var newyear = <?php echo $newyear;  ?>;
-            if (Co_id == namedetail) {
-                $('#detailmoney').css('margin-right', '-100vw');
-                $('#detailmoney').attr("name", 0);
-                $('#fileup').attr("name", 0);
+        function showdata(item, index) {
+            var customerdetail = document.getElementById("customerDetail");
+            var temp = document.getElementsByTagName("template")[0];
+            var clon = temp.content.cloneNode(true);
+            clon.getElementById("Domain").innerHTML = item.Domain;
+            clon.getElementById("Domain_2").innerHTML = item.Domain;
+            clon.getElementById("uplondbill").setAttribute("name", item.Co_id);
+            clon.getElementById("Company").innerHTML = item.Company;
+            clon.getElementById("Rates").innerHTML = item.Rates;
+            clon.getElementById("Co_id").innerHTML = item.Co_id;
+            clon.getElementById("Duedate").innerHTML = item.Duedate;
+            if(item.stbill == "รอการอัปโหลด"){
+                clon.getElementById("status").setAttribute("class","text-danger");
+                clon.getElementById("fileupdiv").innerHTML = item.stbill;
+            }else{
+                var atag =document.createElement('a');
+                atag.href ="customerdetail/"+item.Company+item.Co_id+"/bill/"+item.stbill.Bill_file;
+                atag.setAttribute("target","_blank");
+                atag.innerHTML = item.stbill.Bill_file;
+                clon.getElementById("status").setAttribute("class","text-success");
+                clon.getElementById("fileupdiv").appendChild(atag);
+            }
+            // console.log(item);
+            // console.log(clon);
+            customerdetail.appendChild(clon);
+        }
+        function flipper(data, event) {
+            var target = $(event.target);
+            // console.log(target);
+            if (target.is("button")) {
+                //follow that link
+                uplondbill(data);
+                return true;
             } else {
-                var key = "2";
-                $.ajax({
-                    url: "Process/alertpaymentcycle.php",
-                    type: "POST",
-                    data: {
-                        key,
-                        newyear,
-                        Co_id
-                    },
-                    dataType: "json",
-                    success: function(require) {
-                        // var month = $(this).children("option:selected").val();
-                        // getdate(month);
-                        $('#Co_id').html(require.Co.Co_id);
-                        $('#Domain').html(require.Co.Domain);
-                        $('#Company').html(require.Co.Company);
-                        $('#Rates').html(require.Co.Rates);
-                        $('#Email').html(require.Co.Email);
-                        $('#Line').html(require.Co.Line);
-                        $('#Address').html(require.Co.Address);
-                        $('#fileupdiv').attr('name', require.Co.Co_id);
-                        if (require.Bill.Bill_file != "ไม่มีข้อมูล") {
-                            var bileurl ="customerdetail/"+require.Co.Company+require.Co.Co_id+"/bill/"+require.Bill.Bill_file;
-                            var atag = "<h4><a href=" + bileurl + "  target='_blank' >" + require.Bill.Bill_file + "</a></h4>";
-                            $('#fileupdiv').html(atag);
-                        } else {
-                            $('#fileupdiv').html(' ');
-                            // $('#fileupdiv').html('<input type="file" id="fileup" onchange="uplode(this)">');
-                        }
-                        console.log(require);
-                    },
-                    error:function(e){
-                        console.log(e);
+                $(data).toggleClass("flip");
+            }
+            return false;
+        }
+
+        function uplondbill(data) {
+            var Co_id =$(data).find("button").attr("name");
+            // console.log(Co_id);
+            (async () => {
+                const {
+                    value: file
+                } = await Swal.fire({
+                    title: 'Select PDF',
+                    input: 'file',
+                    inputAttributes: {
+                        'accept': 'application/pdf',
+                        'aria-label': 'Upload your bill file'
                     }
                 })
-            }
-        }
-        $(document).ready(function() {
-            $('#uplondbill').click(function() {
-                (async () => {
-                    const {
-                        value: file
-                    } = await Swal.fire({
-                        title: 'Select PDF',
-                        input: 'file',
-                        inputAttributes: {
-                            'accept': 'application/pdf',
-                            'aria-label': 'Upload your profile picture'
+                if (file) {
+                    // console.log("dawfawg");
+                    var files = file;
+                    // var Co_id = $(data).find("button").attr("name");
+                    var key = "3";
+                    var newyear = <?php echo $newyear; ?>;
+                    var data = new FormData();
+                    data.append("files", files);
+                    data.append("Co_id", Co_id);
+                    data.append("key", key);
+                    data.append("newyear", newyear);
+                    $.ajax({
+                        url: "Process/alertpaymentcycle.php",
+                        type: "POST",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        dataType: "json",
+                        success: function(require) {
+                            // console.log(require);
+                            var icon = require.status;
+                            var title = require.Message;
+                            Notifytoprigth(title, icon);
+                        },
+                        error: function(e) {
+                            console.log(e);
                         }
-                    })
-                    if (file) {
-                        var files = file;
-                        var Co_id = $('#fileupdiv').attr('name');
-                        var key = "3";
-                        var newyear = <?php echo $newyear; ?>;
-                        var data = new FormData();
-                        data.append("files", files);
-                        data.append("Co_id", Co_id);
-                        data.append("key", key);
-                        data.append("newyear", newyear);
-                        $.ajax({
-                            url: "Process/alertpaymentcycle.php",
-                            type: "POST",
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: data,
-                            success: function(require) {
-                                var icon = '';
-                                var title = '';
-                                switch (require) {
-                                    case "0":
-                                        icon = 'warning';
-                                        title = 'ไม่สามารถจัดเตรียมพื้นที่ในการอัปโหลดได้';
-                                        break;
-                                    case "1":
-                                        icon = 'warning';
-                                        title = 'ขออภัยอนุญาตเฉพาะไฟล์ pdf เท่านั้น';
-                                        break;
-                                    case "2":
-                                        icon = 'success';
-                                        title = 'อัปโหลดไฟล์ ' + file.name + " เสร็ยจสมบูรณ์";
-                                        var month = $('#selectmonth').children("option:selected").val();
-                                        getdate(month, newyear);
-                                        showdata(Co_id);
-                                        break;
-                                    case "3":
-                                        icon = 'error';
-                                        title = 'มีปัญหาในการนำข้อมูลจัดเก็บในดาต้าเบส';
-                                        break;
-                                    case "4":
-                                        icon = 'question';
-                                        title = 'ไม่สามารถอัปโหลดไฟล์ได้ในขณะนี้';
-                                        break;
-                                }
-                                Notifytoprigth(title,icon);
-                            }
-                        });
-                    }
-                })()
-            });
-        });
+                    });
+                }
+            })()
+        }
     </script>
 </head>
 
@@ -189,7 +164,7 @@ $month = date("m", strtotime($date . "+1 month"));
             ?>
         </nav>
         <div class="content-wrapper px-2" style="overflow-y: hidden;">
-        <div class="content-header">
+            <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -203,43 +178,49 @@ $month = date("m", strtotime($date . "+1 month"));
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-                <select name="#" id="selectmonth">
-                    <option value="01" <?php if ($month == "01") echo "selected"; ?>>มกราคม</option>
-                    <option value="02" <?php if ($month == "02") echo "selected"; ?>>กุมภาพันธ์</option>
-                    <option value="03" <?php if ($month == "03") echo "selected"; ?>>มีนาคม</option>
-                    <option value="04" <?php if ($month == "04") echo "selected"; ?>>เมษายน</option>
-                    <option value="05" <?php if ($month == "05") echo "selected"; ?>>พฤษภาคม</option>
-                    <option value="06" <?php if ($month == "06") echo "selected"; ?>>มิถุนายน</option>
-                    <option value="07" <?php if ($month == "07") echo "selected"; ?>>กรกฎาคม</option>
-                    <option value="08" <?php if ($month == "08") echo "selected"; ?>>สิงหาคม</option>
-                    <option value="09" <?php if ($month == "09") echo "selected"; ?>>กันยายน</option>
-                    <option value="10" <?php if ($month == "10") echo "selected"; ?>>ตุลาคม</option>
-                    <option value="11" <?php if ($month == "11") echo "selected"; ?>>พฤศจิกายน</option>
-                    <option value="12" <?php if ($month == "12") echo "selected"; ?>>ธันวาคม</option>
-                </select>
-                <div class="pt-3 row">
-                    <div class="col content" id="data" style="transition: all 0.3s;">
-
-                    </div>
-                    <div class="col-md-4" id="detailmoney" style="transition: all 0.3s;margin-right:-100vw;">
-                        <h2>รหัสบริษัท: <span id="Co_id"></span> </h2>
-                        <h3>โดเมน:<span id="Domain"></span></h3>
-                        <h3>ชื่อ:<span id="Company"></span></h3>
-                        <h3>จำนวณเงิน:<span id="Rates"></span></h3>
-                        <h3>ช่องทางการติดต่อ</h3>
-                        <h3>Email:<span id="Email"></span></h3>
-                        <h3>Line:<span id="Line"></span></h3>
-                        <h3>ที่อยู่:<span id="Address"></span></h3>
-                        <h3>ใบเรียกเก็บเงิน: </h3>
-                        <div id="fileupdiv">
-                            <!-- <input type="file" id="fileup" onchange="uplode(this)"> -->
+            <select name="#" id="selectmonth">
+                <option value="01" <?php if ($month == "01") echo "selected"; ?>>มกราคม</option>
+                <option value="02" <?php if ($month == "02") echo "selected"; ?>>กุมภาพันธ์</option>
+                <option value="03" <?php if ($month == "03") echo "selected"; ?>>มีนาคม</option>
+                <option value="04" <?php if ($month == "04") echo "selected"; ?>>เมษายน</option>
+                <option value="05" <?php if ($month == "05") echo "selected"; ?>>พฤษภาคม</option>
+                <option value="06" <?php if ($month == "06") echo "selected"; ?>>มิถุนายน</option>
+                <option value="07" <?php if ($month == "07") echo "selected"; ?>>กรกฎาคม</option>
+                <option value="08" <?php if ($month == "08") echo "selected"; ?>>สิงหาคม</option>
+                <option value="09" <?php if ($month == "09") echo "selected"; ?>>กันยายน</option>
+                <option value="10" <?php if ($month == "10") echo "selected"; ?>>ตุลาคม</option>
+                <option value="11" <?php if ($month == "11") echo "selected"; ?>>พฤศจิกายน</option>
+                <option value="12" <?php if ($month == "12") echo "selected"; ?>>ธันวาคม</option>
+            </select>
+            <br><br>
+            <template id="template">
+                <div class="col-sm-3 flipper col-sm-offset-1" onclick="flipper(this,event)">
+                    <div class="card ">
+                        <div class="front">
+                            <p style="font-size:5rem;" id="status"><i class="far fa-file-pdf"></i></p>
+                            <h1 id="Domain"></h1>
+                            <span id="Duedate"></span><br>
+                            <span><u>รายละเอียดเพิ่มเติม</u></span>
                         </div>
-                        <button type="button" id="uplondbill">อัปโหลดใบวางบิล</button>
+                        <div class="back">
+                            <p>รหัสบริษัท: <span id="Co_id"></span></p>
+                            <div class="text-left ml-2">
+                                <p>โดเมน: <span id="Domain_2"></span></p>
+                                <p>ชื่อ: <span id="Company"></span></p>
+                                <p>จำนวณเงิน: <span id="Rates"></span></p>
+                                <p>ใบเรียกเก็บเงิน: <span id="fileupdiv"></span></p>
+                                <button type="button" name="00" class="btn btn-info" id="uplondbill">อัปโหลดใบวางบิล</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br><br><br>
+            </template>
+            <div class="row" id="customerDetail">
+              
             </div>
+            <br><br><br>
         </div>
+    </div>
     </div>
 
 </body>
