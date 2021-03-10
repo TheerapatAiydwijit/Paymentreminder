@@ -449,7 +449,7 @@ $Co_id = $_GET['Edit'];
                                 <tr>
                                   <th style="width:61px;">ลำดับ</th>
                                   <th>วันที่</th>
-                                  <th>สถาณะ</th>
+                                  <th>สถานะ</th>
                                 </tr>
                               </thead>
                               <tbody class="tboyscoll" id="bodydetail">
@@ -481,7 +481,7 @@ $Co_id = $_GET['Edit'];
                             <button type="button" id="editcustomer" class="btn btn-danger ml-3">ปิด</button>
                           </li>
                           <li class="list-group-item">
-                            แก้ไขเนื้อหาอีเมลย์
+                            แก้ไขเนื้อหาอีเมล
                            <a href="Alertmailedit.php?Co_id=<?php echo $Co_id; ?>"><button type="button" id="editcustomer" class="btn btn-warning ml-3">แก้ไข</button></a>
                           </li>
                         </div>
@@ -499,7 +499,7 @@ $Co_id = $_GET['Edit'];
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียดอีเมลย์</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียดอีเมล</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -533,7 +533,7 @@ $Co_id = $_GET['Edit'];
               <li class="list-group-item">
                 <div class="row">
                   <div class="col">ชำระเงินปี 2564</div>
-                  <div class="col-md-5 text-right">สถาณะ</div>
+                  <div class="col-md-5 text-right">สถานะ</div>
                 </div>
               </li>
               <li class="list-group-item">
@@ -541,7 +541,7 @@ $Co_id = $_GET['Edit'];
                   <a href="#" class="paylist" id="1">
                     <div class="col">ชำระเงินปี 2564</div>
                   </a>
-                  <div class="col-md-5 text-right">สถาณะ</div>
+                  <div class="col-md-5 text-right">สถานะ</div>
                 </div>
               </li>
             </ul>
@@ -570,7 +570,7 @@ $Co_id = $_GET['Edit'];
                   <span> แบ่งจ่าย : <b id="num_rows">3</b> งวด</span>
                 </li>
                 <li class="list-group">
-                  <span> สถาณะการชำระเงิน : <b id="statuspay">เสร็ยจสิ้น</b></span>
+                  <span> สถานะการชำระเงิน : <b id="statuspay">เสร็ยจสิ้น</b></span>
                 </li>
               </ul>
             </div>
