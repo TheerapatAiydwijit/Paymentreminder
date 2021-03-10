@@ -87,7 +87,7 @@ if (isset($_GET['Edit'])) {
         success: function(require) {
           console.log(require);
           var icon = "success";
-          var tital = "ทำการบันทึกรายละเอียดการจ่ายเงินเสร็ยจสิ้น";
+          var tital = "ทำการบันทึกรายละเอียดการจ่ายเงินเสร็จสิ้น";
           Notifytoprigth(tital, icon);
           setTimeout(function() {
             location.reload();
@@ -402,7 +402,7 @@ if (isset($_GET['Edit'])) {
                           if ($value['status'] == "0") {
                             echo '<span class="badge badge-secondary badge-warning">กำลังดำเนินการ</span>';
                           } else {
-                            echo '<span class="badge badge-secondary badge-success">เสร็ยจสิ้น</span>';
+                            echo '<span class="badge badge-secondary badge-success">เสร็จสิ้น</span>';
                           }
                         } else {
                           echo '<span class="badge badge-secondary badge-info">ไม่ระบุ</span>';

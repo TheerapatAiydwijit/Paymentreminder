@@ -26,7 +26,7 @@ if (chekloginlines($userId)) {
         if($unlink['status'] == "success"){
             $loginout = UnlinkRichMenu($userId, $Headers);
             if($loginout['status'] == "success"){
-                $string = "ออกจากระบบในอุปกรณ์เสร็ยจสิ้น";
+                $string = "ออกจากระบบในอุปกรณ์เสร็จสิ้น";
             }else{
                 $string = "พบปัญหาในระหว่างการออกจากระบบ".$loginout['messages'];
             }
@@ -55,12 +55,16 @@ function getcustomer($month)
     $sql = "SELECT * FROM customer WHERE Duedate LIKE '%$sqllike%' AND Sdelete='0' ORDER BY Duedate";
     $quray = mysqli_query($conn, $sql) or die("Error : " . mysqli_error($conn));
     $returnarray = array();
+    $year = date("Y");
     while ($data = mysqli_fetch_array($quray, MYSQLI_ASSOC)) {
         $Co_id = $data['Co_id'];
         $Company = $data['Company'];
         $Domain = $data['Domain'];
         $Rates = $data['Rates'];
         $Duedate = $data['Duedate'];
+        $strMonth = date("n", strtotime($Duedate));
+        $strDay = date("j", strtotime($Duedate));
+        $Duedate =$year."-".$strMonth."-".$strDay; 
         $Coarray = array(
             "Co_id" => $Co_id,
             "Company" => $Company,
@@ -84,7 +88,7 @@ function unlinkLineID($userId)
     if (mysqli_query($conn, $sql)) {
         $return = array(
             "status" => "success",
-            "message" => "ลบข้อมูลในดาต้าเบสเสร็ยจสิ้น"
+            "message" => "ลบข้อมูลในดาต้าเบสเสร็จสิ้น"
         );
     } else {
         $return = array(

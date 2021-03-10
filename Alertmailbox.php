@@ -70,7 +70,7 @@ include("include/Connect.php");
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="index.php">หน้าหลัก</a></li>
-                                <li class="breadcrumb-item active">กล่องอีเมลย์</li>
+                                <li class="breadcrumb-item active">กล่องอีเมล</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
