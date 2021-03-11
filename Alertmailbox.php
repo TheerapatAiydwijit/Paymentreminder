@@ -135,7 +135,7 @@ include("include/Connect.php");
                         
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div>
                                     <button type="button" class="btn btn-warning btn-sm" id="selectall">
                                     <i class="far fa-plus-square"></i>  เลือกทั้งหมด
                                     </button>
