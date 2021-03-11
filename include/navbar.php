@@ -8,41 +8,41 @@ $result = $conn->query($select);
 $numrow = $result->num_rows;
 ?>
 <script>
-    $(document).ready(function() {
-        $('.clik').click(function() {
-            var detil = $(this).html();
-            var level = $(this).attr("Level");
-            var Not_id = $(this).attr("id");
-            // console.log(level);
-            $.ajax({
-                url: "Process/navbar.php",
-                data: {
-                    Not_id
-                },
-                type: "POST",
-                success: function(require) {
-                    var setbgc = "#noti" + Not_id;
-                    $(setbgc).css("background-color", "#F0F0F0");
-                    if (level == "2") {
-                        Swal.fire({
-                            icon: 'question',
-                            title: 'ข้อผิดพลาดจากการแจ้งเตือน',
-                            text: detil
-                        })
-                    } else {
-                        if (level == "3") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'ข้อผิดพลาดจากการส่ง Email',
-                                text: detil
-                            })
-                        }
-                    }
-                }
-            });
+  $(document).ready(function() {
+    $('.clik').click(function() {
+      var detil = $(this).find('.Detail').html();
+      var level = $(this).attr("Level");
+      var Not_id = $(this).attr("id");
+      // console.log(level);
+      $.ajax({
+        url: "Process/navbar.php",
+        data: {
+          Not_id
+        },
+        type: "POST",
+        success: function(require) {
+          var setbgc = "#noti" + Not_id;
+          $(setbgc).css("background-color", "#F0F0F0");
+          if (level == "2") {
+            Swal.fire({
+              icon: 'question',
+              title: 'ข้อผิดพลาดจากการแจ้งเตือน',
+              text: detil
+            })
+          } else {
+            if (level == "3") {
+              Swal.fire({
+                icon: 'warning',
+                title: 'ข้อผิดพลาดจากการส่ง Email',
+                text: detil
+              })
+            }
+          }
+        }
+      });
 
-        });
     });
+  });
 </script>
 <!-- Left navbar links -->
 <ul class="navbar-nav">
@@ -55,10 +55,10 @@ $numrow = $result->num_rows;
   <li class="nav-item">
     <a class="nav-link" href="#">
       <h4>
-      <span class="badge badge-secondary badge-info">
-        <?php
-        echo DateThai($date);
-        ?>
+        <span class="badge badge-secondary badge-info">
+          <?php
+          echo DateThai($date);
+          ?>
         </span>
       </h4>
     </a>
@@ -67,7 +67,8 @@ $numrow = $result->num_rows;
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#">
       <h2><i class="far fa-bell"></i>
-      <span class="badge badge-warning navbar-badge"><?php echo $numrow; ?></span></h2>
+        <span class="badge badge-warning navbar-badge"><?php echo $numrow; ?></span>
+      </h2>
     </a>
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <span class="dropdown-item dropdown-header"><?php echo $numrow; ?> Notifications</span>
@@ -75,20 +76,26 @@ $numrow = $result->num_rows;
       if ($numrow > 0) {
         while ($row = $result->fetch_assoc()) { ?>
           <div class="dropdown-divider" id="noti<?php echo $row['Not_id']; ?>"></div>
+
           <a href="#" class="dropdown-item clik" id="<?php echo $row['Not_id']; ?>" Level="<?php echo $row['Level']; ?>">
-            <?php echo $row['Detail']; ?>
-            <span class="float-right text-muted text-sm">
-              <?php
-              echo difference($row['Not_date']);
-              ?></span>
+            <div class="row">
+              <div class="col-md-8" style=" overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;">
+                <span class="text-sm Detail">
+                  <?php echo $row['Detail']; ?>
+                </span>
+              </div>
+              <div class="col">
+                <span class="float-right text-muted text-sm">
+                  <?php
+                  echo difference($row['Not_date']);
+                  ?></span>
+              </div>
+            </div>
           </a>
       <?php  }
       } ?>
-      <!-- <div class="dropdown-divider"></div>
-      <a href="#" class="dropdown-item">
-        <i class="fas fa-envelope mr-2"></i> 4 new messages
-        <span class="float-right text-muted text-sm">3 mins</span>
-      </a> -->
     </div>
   </li>
   <li class="nav-item">

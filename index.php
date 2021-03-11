@@ -52,8 +52,8 @@ if(isset($_COOKIE['USERID'])) {
                         console.log(require);
                         if (require == "1") {
                             Swal.fire(
-                                'Good job!',
-                                'You clicked the button!',
+                                'เข้าสู่ระบบเสร็ยจสิ้น',
+                                'ระบบกำลังนำท่านเข้าสู่หน้าถัดไป',
                                 'success'
                             )
                             setTimeout(function() {
