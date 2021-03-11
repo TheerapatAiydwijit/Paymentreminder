@@ -40,7 +40,7 @@ $numrow = $result->num_rows;
           }
         }
       });
-
+      $(this).css('background-color','#BDC3C7');
     });
   });
 </script>
