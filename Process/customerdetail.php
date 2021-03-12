@@ -39,8 +39,8 @@ if ($key == "loaddata") {
   echo $jsonreturn;
 } elseif ($key == "UPDATE") {
   $columnname = $_POST['column'];
-  $value = $_POST['value'];
-  $Co_id  = $_POST['Co_id'];
+  $value =  mysqli_real_escape_string($conn,$_POST['value']);
+  $Co_id  =  mysqli_real_escape_string($conn,$_POST['Co_id']);
   if ($value == "ไม่มีข้อมูล") {
     $value = "";
   }
@@ -95,7 +95,7 @@ if ($key == "loaddata") {
   $jsonreturn = json_encode($array, JSON_UNESCAPED_UNICODE);
   echo $jsonreturn;
 } elseif ($key == "londpayment") {
-  $Co_id = $_POST['Co_id'];
+  $Co_id =  mysqli_real_escape_string($conn,$_POST['Co_id']);
   // $sql ="SELECT * FROM payment WHERE Co_id='$Co_id' ORDER BY date";
   $query = mysqli_query($conn, "SELECT * FROM payment WHERE Co_id='$Co_id' ORDER BY date") or die("Error : " . mysqli_error($conn));
   $array = array();
@@ -112,7 +112,7 @@ if ($key == "loaddata") {
   $jsonreturn = json_encode($array, JSON_UNESCAPED_UNICODE);
   echo $jsonreturn;
 } elseif ($key == "londimg") {
-  $payment_id = $_POST['payment_id'];
+  $payment_id =  mysqli_real_escape_string($conn,$_POST['payment_id']);
   // $sql ="SELECT Co_id FROM payment WHERE payment_id='$payment_id'";
   $queryCo_id = mysqli_query($conn, "SELECT Co_id,status FROM payment WHERE payment_id='$payment_id'") or die("Error : " . mysqli_error($conn));
   $alldata = mysqli_fetch_array($queryCo_id, MYSQLI_ASSOC);
@@ -146,7 +146,7 @@ if ($key == "loaddata") {
   $jsonreturn = json_encode($array, JSON_UNESCAPED_UNICODE);
   echo $jsonreturn;
 } elseif ($key == "showemail") {
-  $send_id = $_POST['send_id'];
+  $send_id =  mysqli_real_escape_string($conn,$_POST['send_id']);
   // $sql = "SELECT * FROM sendemail WHERE send_id ='$send_id'";
   $quary = mysqli_query($conn, "SELECT * FROM sendemail WHERE send_id='$send_id'") or die("Error : " . mysqli_error($conn));
   $alldata = mysqli_fetch_array($quary, MYSQLI_ASSOC);

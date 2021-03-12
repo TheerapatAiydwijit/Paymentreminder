@@ -38,8 +38,8 @@ if ($key == "all") {
     $jsonreturn = json_encode($array, JSON_UNESCAPED_UNICODE);
     echo $jsonreturn;
 } elseif ($key == "UPDATE") {
-    $columnname = $_POST['column'];
-    $value = $_POST['value'];
+    $columnname = mysqli_real_escape_string($conn,$_POST['column']);
+    $value = mysqli_real_escape_string($conn,$_POST['value']);
     if ($value == "ไม่มีข้อมูล") {
         $value = "";
     }
@@ -48,7 +48,7 @@ if ($key == "all") {
     $quary = mysqli_query($conn, $sqlUPDATE) or die("Error : " . mysqli_error($conn));
     echo "1";
 } elseif ($key == "Quotation") {
-    $Offerprice_id  = $_POST['Offerprice_id'];
+    $Offerprice_id  = mysqli_real_escape_string($conn,$_POST['Offerprice_id']);
     $quotationsql = "SELECT * FROM quotation WHERE Offerprice_id='$Offerprice_id'";
     $dataquery = mysqli_query($conn, $quotationsql) or die("Error : " . mysqli_error($conn));
     $array = array();
@@ -97,6 +97,8 @@ if ($key == "all") {
         $fileName = $upond['filename'];
         $insert = "INSERT INTO quotation(Offerprice_id,Date,Toppic,Message,Sendto,Filename)
                    VALUE ('$Offerprice_id','$datetime','$Toppic','$message','$Sendto','$fileName')";
+
+                   
         if ($conn->query($insert) === TRUE) {
             $last_id = mysqli_insert_id($conn);
             $return = array(

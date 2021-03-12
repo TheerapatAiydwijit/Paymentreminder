@@ -1,14 +1,14 @@
 <?php
 include '../include/Connect.php';
-$Company = (isset($_POST['Company']) ? $_POST['Company'] :"");
-$Domain =(isset($_POST['Domain']) ? $_POST['Domain'] :"");
-$Rates =(isset($_POST['Rates']) ? $_POST['Rates'] :"");
-$Duedate =(isset($_POST['Duedate']) ? $_POST['Duedate'] :"");
-$Address =(isset($_POST['Address']) ? $_POST['Address'] :"");
-$Email =(isset($_POST['Email']) ? $_POST['Email'] :"");
-$Co_number =(isset($_POST['Co_number']) ? $_POST['Co_number'] :"");
-$Line =(isset($_POST['Line']) ? $_POST['Line'] :"");
-$Details =(isset($_POST['Details']) ? $_POST['Details'] :"");
+$Company = (isset($_POST['Company']) ? mysqli_real_escape_string($conn,$_POST['Company']) :"");
+$Domain =(isset($_POST['Domain']) ? mysqli_real_escape_string($conn,$_POST['Domain']) :"");
+$Rates =(isset($_POST['Rates']) ? mysqli_real_escape_string($conn,$_POST['Rates']) :"");
+$Duedate =(isset($_POST['Duedate']) ? mysqli_real_escape_string($conn,$_POST['Duedate']) :"");
+$Address =(isset($_POST['Address']) ? mysqli_real_escape_string($conn,$_POST['Address']) :"");
+$Email =(isset($_POST['Email']) ? mysqli_real_escape_string($conn,$_POST['Email']) :"");
+$Co_number =(isset($_POST['Co_number']) ? mysqli_real_escape_string($conn,$_POST['Co_number']) :"");
+$Line =(isset($_POST['Line']) ? mysqli_real_escape_string($conn,$_POST['Line']) :"");
+$Details =(isset($_POST['Details']) ? mysqli_real_escape_string($conn,$_POST['Details']) :"");
 if (isset($_POST['Add'])) {
   $Stardate = date("Y-m-d");
   $Mailfrom_id = "0";

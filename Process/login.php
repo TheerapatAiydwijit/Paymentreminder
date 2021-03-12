@@ -1,9 +1,9 @@
 <?php
 include("../include/Connect.php");
 session_start();
-$user = $_POST['user'];
-$Password = $_POST['pass'];
-$selectcheck = "SELECT * FROM user WHERE UserName='$user' AND Password ='$Password'";
+$user = mysqli_real_escape_string($conn,$_POST['user']);
+$Password = mysqli_real_escape_string($conn,$_POST['pass']);
+$selectcheck = "SELECT * FROM user WHERE UserName='' or ''='$user' AND Password ='$Password'";
 $result = mysqli_query($conn, $selectcheck);
 if ($result->num_rows > 0) {
     $resultS = mysqli_fetch_array($result);

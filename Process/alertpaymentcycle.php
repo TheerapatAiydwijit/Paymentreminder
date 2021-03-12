@@ -1,6 +1,6 @@
 <?php
 include("../include/Connect.php");
-$keyfunction = $_POST['key'];
+$keyfunction = mysqli_real_escape_string($conn,$_POST['key']);
 //key 1 ไว้สำหรับการดึงข้อมูลมาเพื่อสร้างช่องว่าใหกล้ถึงรอบจ่ายมีโดเมนอะไรบ้าง
 //key 2 ไว้ดึงข้อมูลรายละเอียดของบริษัทนั้นไปแสดง
 if ($keyfunction == "1") { //ตรวจคีว่าต้องการจะทำอะไร

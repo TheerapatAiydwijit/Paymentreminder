@@ -1,8 +1,8 @@
 <?php
 include '../include/Connect.php';
 if (isset($_POST['Edit'])) {
-  $date = $_POST['date'];
-  $Co_id = $_POST['Co_id'];
+  $date =  mysqli_real_escape_string($conn,$_POST['date']);
+  $Co_id =  mysqli_real_escape_string($conn,$_POST['Co_id']);
   $order_detail  = $_POST['Edit'];
   $chek = "SELECT payment_id FROM payment WHERE date='$date' AND Co_id='$Co_id'";
   $quraychek = mysqli_query($conn, $chek);
@@ -16,8 +16,8 @@ if (isset($_POST['Edit'])) {
   }
   paymenttosuss($payment_id);
 } elseif (isset($_POST['Add'])) {
-  $date = $_POST['date'];
-  $Co_id = $_POST['Co_id'];
+  $date =  mysqli_real_escape_string($conn,$_POST['date']);
+  $Co_id =  mysqli_real_escape_string($conn,$_POST['Co_id']);
   $chek = "SELECT payment_id FROM payment WHERE date='$date' AND Co_id='$Co_id'";
   $quraychek = mysqli_query($conn, $chek);
   if ($quraychek->num_rows > 0) {

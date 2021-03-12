@@ -1,15 +1,15 @@
 <?php
 include '../include/Connect.php';
-$Company = $_POST['Company'];
-$Domain = $_POST['Domain'];
-$Rates = $_POST['Rates'];
-$Duedate = $_POST['Duedate'];
-$Address = $_POST['Address'];
-$Email = $_POST['Email'];
-$Co_number = $_POST['Co_number'];
-$Line = $_POST['Line'];
-$Details = $_POST['Details'];
-$key = $_POST['key'];
+$Company = mysqli_real_escape_string($conn,$_POST['Company']);
+$Domain = mysqli_real_escape_string($conn,$_POST['Domain']);
+$Rates = mysqli_real_escape_string($conn,$_POST['Rates']);
+$Duedate = mysqli_real_escape_string($conn,$_POST['Duedate']);
+$Address = mysqli_real_escape_string($conn,$_POST['Address']);
+$Email = mysqli_real_escape_string($conn,$_POST['Email']);
+$Co_number = mysqli_real_escape_string($conn,$_POST['Co_number']);
+$Line = mysqli_real_escape_string($conn,$_POST['Line']);
+$Details = mysqli_real_escape_string($conn,$_POST['Details']);
+$key = mysqli_real_escape_string($conn,$_POST['key']);
 if ($key == "add") {
   $Stardate = date("Y-m-d");
   $Mailfrom_id = "0";

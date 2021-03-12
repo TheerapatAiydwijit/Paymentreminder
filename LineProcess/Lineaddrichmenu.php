@@ -1,8 +1,9 @@
 <?php
 include('LineFunction.php');
+// include("../include/Connect.php");
 $user_line_Id = $_POST['uid'];
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = mysqli_real_escape_string($conn,$_POST['username']);
+$password = mysqli_real_escape_string($conn,$_POST['password']);
 $login = cheklogin($username, $password);
 if ($login['status'] == 'success') {
   $userid = $login['data'];

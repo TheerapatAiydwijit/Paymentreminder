@@ -2,7 +2,7 @@
     include("../include/Connect.php");
     include("../include/Frequently.php");
     if(isset($_GET['term'])){
-        $term = $_GET['term'];
+        $term =  mysqli_real_escape_string($conn,$_GET['term']);
         $sql = "SELECT * FROM customer WHERE Domain LIKE '%".$term."%' OR Company LIKE '%".$term."%'";
         $quary = mysqli_query($conn,$sql) or die("Error : ". mysqli_error($conn));
         $pagination = array(

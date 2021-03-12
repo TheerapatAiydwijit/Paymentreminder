@@ -61,7 +61,7 @@
       jQuery("#post").click(function() {
           liff.closeWindow();
         jQuery.post(
-          "https://reminderthaiweb.000webhostapp.com/LineProcess/Lineaddrichmenu.php", {
+          "https://reminderthaiweb2.000webhostapp.com/LineProcess/Lineaddrichmenu.php", {
             uid: data.context.userId,
             username: $('#usernamet').val(),
             password: $('#password').val()
