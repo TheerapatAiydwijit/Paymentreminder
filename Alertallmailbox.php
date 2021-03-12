@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 include("include/Connect.php");
@@ -7,6 +5,8 @@ $date = date('Y-m-01');
 $current = date("m", strtotime($date));
 $month = date("m", strtotime($date . "+1 month"));
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">

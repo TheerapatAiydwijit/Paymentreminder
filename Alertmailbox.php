@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 include("include/Connect.php");
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">

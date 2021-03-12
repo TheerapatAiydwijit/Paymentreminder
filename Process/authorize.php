@@ -2,7 +2,7 @@
 // include("../include/loginChek.php");
 define('CLIENT_ID', '1Z7fhAlcpFRdHoZFsQDVQv');
 define('LINE_API_URI', 'https://notify-bot.line.me/oauth/authorize?');
-define('CALLBACK_URI', 'https://reminderthaiweb.000webhostapp.com/Process/subscription.php');
+define('CALLBACK_URI', 'https://reminderthaiweb2.000webhostapp.com/Process/subscription.php');
 date_default_timezone_set('asia/bangkok');
 $Unit = date('dmyis');
 $random = rand(1,9);

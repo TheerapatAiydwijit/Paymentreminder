@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 $date = date('Y-m-01');
@@ -11,6 +9,9 @@ if ($current == "12") {
 $month = date("m", strtotime($date . "+1 month"));
 // $date = "-".$date."-";
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">

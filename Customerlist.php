@@ -1,6 +1,5 @@
 <?php
 include("include/loginChek.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

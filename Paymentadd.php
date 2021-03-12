@@ -334,7 +334,9 @@ if (isset($_GET['Edit'])) {
               </div>
             </div>
             <a href="Paymentlist.php"><button type="button" class="btn btn-info text-white"><i class="fas fa-arrow-left"></i>ย้อนกลับ</button></a>
-            <button type="submit" class="btn btn-success text-white"><i class="far fa-save"></i> บันทึก</button>
+            <?php if (!(isset($_GET['Edit']))) { ?>
+              <button type="submit" class="btn btn-success text-white"><i class="far fa-save"></i> บันทึก</button>
+           <?php } ?>
           </div>
           <div class="col-md-3 order-md-2 mb-4">
             <ul class="list-unstyled">
@@ -368,33 +370,6 @@ if (isset($_GET['Edit'])) {
                   } ?>
                 </ul>
               </li>
-              <!-- <li>
-                <ul class="list-group mb-3" id="periodtable">
-                  <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                      <h6 class="my-0">งวดที่ 1</h6>
-                      <small class="text-muted">filename</small>
-                    </div>
-                    <div class="input-group-prepend">
-                      <button type="button" class="btn btn-light">
-                        <span class="input-group-text h1"><i class="far fa-eye"></i></span>
-                      </button>
-                    </div>
-                    <span class="text-muted"><i class="far fa-eye"></i></span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                      <h6 class="my-0">งวดที่ 2</h6>
-                      <small class="text-muted">No file</small>
-                    </div>
-                    <div class="input-group-prepend">
-                      <button type="button" class="btn btn-light">
-                        <span class="input-group-text h1"><i class="fas fa-upload"></i></span>
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </li> -->
               <li class="list-group-item d-flex justify-content-between">
                 <span>สถาณะการชำระเงิน</span>
                 <strong><?php

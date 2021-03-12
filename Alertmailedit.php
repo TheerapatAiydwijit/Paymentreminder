@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 include_once("include/Connect.php");
@@ -13,6 +11,9 @@ if (isset($_GET['Co_id'])) {
     $mailid = $data['Mailfrom_id'];
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <!-- <base href="http://localhost/Paymentreminder/"> -->

@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 include("include/calendarEvents.php");
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">

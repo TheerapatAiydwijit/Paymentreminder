@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include("include/loginChek.php");
 include('include/Connect.php');
@@ -9,6 +7,9 @@ if (isset($_GET['Offerprice_id'])) {
   $Offerprice_id = "NULL";
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
   <meta charset="UTF-8">
@@ -299,6 +300,7 @@ if (isset($_GET['Offerprice_id'])) {
                         <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-warning mr-2">OfferpriceManagement</i>แถบเครื่องมือ</h6>
                         <div>
                           <li class="list-group-item">
+                          <?php  ?>
                             <center>
                               <input type="submit" id="submit" class="btn btn-success" value="บันทึก">
                             </center>

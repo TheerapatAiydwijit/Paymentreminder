@@ -28,7 +28,7 @@ function gettoken($userid, $code)
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => 'grant_type=authorization_code&code=' . $code . '&redirect_uri=https://reminderthaiweb.000webhostapp.com/Process/subscription.php&client_id=1Z7fhAlcpFRdHoZFsQDVQv&client_secret=8AAIMekpaIlKd1wY90W4fsrTys2I5ecnhUqzY0Qq3Tg',
+        CURLOPT_POSTFIELDS => 'grant_type=authorization_code&code=' . $code . '&redirect_uri=https://reminderthaiweb2.000webhostapp.com/Process/subscription.php&client_id=1Z7fhAlcpFRdHoZFsQDVQv&client_secret=8AAIMekpaIlKd1wY90W4fsrTys2I5ecnhUqzY0Qq3Tg',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/x-www-form-urlencoded'
         ),
