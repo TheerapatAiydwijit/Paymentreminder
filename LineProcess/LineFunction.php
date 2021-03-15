@@ -290,8 +290,8 @@ function cheklogin($username, $password)
     if ($result->num_rows > 0) {
     while ($allpass = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $pass = $allpass['Password'];
-        if (password_verify($Password,$pass)) {
-            $userid = $alldata['userid'];
+        if (password_verify($password,$pass)) {
+            $userid = $allpass['userid'];
             $chekloginnum = "1"; 
             $return = array(
                 "status" => "success",

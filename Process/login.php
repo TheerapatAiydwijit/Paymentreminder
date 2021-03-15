@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
     if (!(isset($_SESSION['USERID']))) {
         $return = array(
             "status" => "error",
-            "Message" => $Password
+            "Message" => "ไม่พบผู้ใช้ในระบบ"
         );
     }
 } else {
