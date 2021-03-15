@@ -285,21 +285,33 @@ function cheklogin($username, $password)
 {
     include("../include/Connect.php");
     // $sql = "SELECT userid,Username,Password FROM user WHERE Username='$username' AND Password='$password'";
-    $qurey = mysqli_query($conn, "SELECT userid,Username,Password FROM user WHERE Username='$username' AND Password='$password'") or die("Error : " . mysqli_error($conn));
-    if ($qurey->num_rows > 0) {
-        $alldata = mysqli_fetch_array($qurey, MYSQLI_ASSOC);
-        $userid = $alldata['userid'];
-        $return = array(
-            "status" => "success",
-            "data" => $userid,
-            "Message" => "ชื่อผู้ใช้และรหัสผ่านถูกต้อง"
-        );
-    } else {
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE Username='$username'") or die("Error : " . mysqli_error($conn));
+    $chekloginnum = "0"; 
+    if ($result->num_rows > 0) {
+    while ($allpass = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $pass = $allpass['Password'];
+        if (password_verify($Password,$pass)) {
+            $userid = $alldata['userid'];
+            $chekloginnum = "1"; 
+            $return = array(
+                "status" => "success",
+                "data" => $userid,
+                "Message" => "ชื่อผู้ใช้และรหัสผ่านถูกต้อง"
+            );
+        }
+    }
+    if ($chekloginnum == "0") {
         $return = array(
             "status" => "error",
             "Message" => "ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง"
         );
     }
+} else {
+    $return = array(
+        "status" => "error",
+        "Message" => "ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง"
+    );
+}
     return $return;
 }
 // เพิ่มข้อมูลไลย์ในดาต้าเบส

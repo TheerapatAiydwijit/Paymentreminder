@@ -49,8 +49,9 @@ if(isset($_COOKIE['USERID'])) {
                         cookie
                     },
                     success: function(require) {
-                        console.log(require);
-                        if (require == "1") {
+                        var obj = JSON.parse(require);
+                        console.log(obj);
+                        if (obj.status == "success") {
                             Swal.fire(
                                 'เข้าสู่ระบบเสร็ยจสิ้น',
                                 'ระบบกำลังนำท่านเข้าสู่หน้าถัดไป',

@@ -56,6 +56,9 @@ function getcustomer($month)
     $quray = mysqli_query($conn, $sql) or die("Error : " . mysqli_error($conn));
     $returnarray = array();
     $year = date("Y");
+    if($month =="01"){
+        $year = date("m", strtotime($year . "+1 year"));
+    }
     while ($data = mysqli_fetch_array($quray, MYSQLI_ASSOC)) {
         $Co_id = $data['Co_id'];
         $Company = $data['Company'];
