@@ -11,7 +11,8 @@ $account = array(
 if ($quarystatus->num_rows > 0) {
   $sedemailchek = "SELECT * FROM sendemail WHERE status='0'";
   $chek = mysqli_query($conn, $sedemailchek);
-  while ($sendemail = mysqli_fetch_array($chek)) {
+  if($chek ->num_rows > 0){
+     while ($sendemail = mysqli_fetch_array($chek)) {
     $Co_id = $sendemail['Co_id'];
     $resultmail = Sendinformation($Co_id, $account);
     if ($resultmail['status'] == "success") {
@@ -32,6 +33,7 @@ if ($quarystatus->num_rows > 0) {
       }
     }
     $LineMass = sedmass($text, "9");
+  }
   }
   $date = date('Y-m-01');
   $month = date("m", strtotime($date . "+1 month"));

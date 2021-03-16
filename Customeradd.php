@@ -1,16 +1,9 @@
 <?php
 include("include/loginChek.php");
 include('include/Connect.php');
-if (isset($_GET['Offerprice_id'])) {
-  $Offerprice_id = $_GET['Offerprice_id'];
-} else {
-  $Offerprice_id = "NULL";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,12 +25,10 @@ if (isset($_GET['Offerprice_id'])) {
     $(document).ready(function() {
       $('#cusomeradd').submit(function(event) {
         // console.log("Dawfwa");
-        var Offerprice_id = <?php echo $Offerprice_id; ?>;
         event.preventDefault();
         var key = "add";
         var data = new FormData(this);
         data.append("key", key);
-        data.append("Offerprice_id", Offerprice_id);
         $.ajax({
           url: "Process/Cusomeradd.php",
           cache: false,
@@ -66,43 +57,6 @@ if (isset($_GET['Offerprice_id'])) {
         $('#profil').trigger('click');
       });
     });
-
-    function uplondpdf(fileist) {
-      var files = fileist.files[0];
-      var url = URL.createObjectURL(files);
-      // alert(url);
-      $('#profileimg').attr('src', url);
-    }
-    var Offerprice_id = <?php echo $Offerprice_id; ?>;
-    if (!(Offerprice_id == "NULL")) {
-      var key = "all";
-      $.ajax({
-        url: "Process/customer_offerprice_detail.php",
-        data: {
-          key,
-          Offerprice_id
-        },
-        dataType: "json",
-        type: "post",
-        success: function(require) {
-          // console.log(require);
-          // var obj = JSON.parse(require);
-          $('#Company').val(require.Company);
-          $('#Domain').val(require.Domain);
-          $('#email').val(require.Email);
-          $('#Co_number').val(require.Co_number);
-          if (!(require.Address == "ไม่มีข้อมูล")) {
-            $('#address').val(require.Address);
-          }
-          if (!(require.Details == "ไม่มีข้อมูล")) {
-            $('#details').val(require.Details);
-          }
-        },
-        error: function(e) {
-          console.log(e);
-        }
-      });
-    }
   </script>
 </head>
 

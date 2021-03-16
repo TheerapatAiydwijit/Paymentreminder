@@ -9,7 +9,7 @@ $Email = mysqli_real_escape_string($conn,$_POST['Email']);
 $Co_number = mysqli_real_escape_string($conn,$_POST['Co_number']);
 $Line = mysqli_real_escape_string($conn,$_POST['Line']);
 $Details = mysqli_real_escape_string($conn,$_POST['Details']);
-$key = mysqli_real_escape_string($conn,$_POST['key']);
+$key = $_POST['key'];
 if ($key == "add") {
   $Stardate = date("Y-m-d");
   $Mailfrom_id = "0";
