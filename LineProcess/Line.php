@@ -41,7 +41,18 @@ if (chekloginlines($userId)) {
         $string = "การยืนยันสิทธิในการเข้าถึงล้มเหลว";
         $messages['messages'][0] = getFormatTextMessage($string, "0");
     } elseif ($text == "ออกจากระบบ") {
-        $string = "การยืนยันสิทธิในการเข้าถึงล้มเหลว";
+        $string = "action=Logout";
+        $unlink = unlinkLineID($userId);
+        if($unlink['status'] == "success"){
+            $loginout = UnlinkRichMenu($userId, $Headers);
+            if($loginout['status'] == "success"){
+                $string = "ออกจากระบบในอุปกรณ์เสร็จสิ้น";
+            }else{
+                $string = "พบปัญหาในระหว่างการออกจากระบบ".$loginout['messages'];
+            }
+        }else{
+            $string = "พบปัญหาในระหว่างการออกจากระบบ".$unlink['messages'];
+        }
         $messages['messages'][0] = getFormatTextMessage($string, "0");
     }
 }
