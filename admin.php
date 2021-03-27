@@ -480,5 +480,4 @@ include("Process/authorize.php");
     </div>
 </div>
 </body>
-
 </html>
